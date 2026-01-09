@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: go-rest-api-template
+    env: go
+    buildCommand: go build -o bin/api cmd/api/main.go
+    startCommand: ./bin/api
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: DB_URL
+        fromDatabase:
+          name: go-api-db
+          property: connectionString
+
+databases:
+  - name: go-api-db
+    databaseName: main
+    user: postgres
